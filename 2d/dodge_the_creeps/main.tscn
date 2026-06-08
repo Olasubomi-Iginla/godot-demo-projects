@@ -26,13 +26,17 @@ grow_vertical = 2
 color = Color(0.219608, 0.372549, 0.380392, 1)
 
 [node name="Player" parent="." unique_id=927660131 instance=ExtResource("3_veqnc")]
+process_mode = 1
 
 [node name="MobTimer" type="Timer" parent="." unique_id=228987391]
+process_mode = 1
 wait_time = 0.5
 
 [node name="ScoreTimer" type="Timer" parent="." unique_id=451982858]
+process_mode = 1
 
 [node name="StartTimer" type="Timer" parent="." unique_id=238316384]
+process_mode = 1
 wait_time = 2.0
 one_shot = true
 
@@ -45,6 +49,7 @@ curve = SubResource("1")
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" unique_id=1080274542]
 
 [node name="HUD" parent="." unique_id=1879130737 instance=ExtResource("4_0qnje")]
+process_mode = 1
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=267371681]
 stream = ExtResource("5_55d8h")

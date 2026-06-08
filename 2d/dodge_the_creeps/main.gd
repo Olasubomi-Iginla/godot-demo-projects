@@ -3,6 +3,10 @@ extends Node
 @export var mob_scene: PackedScene
 var score
 
+func _ready():
+	# Allow this node to continue receiving input while the game is paused
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
@@ -10,8 +14,9 @@ func game_over():
 	$Music.stop()
 	$DeathSound.play()
 
-
 func new_game():
+	get_tree().paused = false
+
 	get_tree().call_group(&"mobs", &"queue_free")
 	score = 0
 	$Player.start($StartPosition.position)
@@ -19,7 +24,6 @@ func new_game():
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
 	$Music.play()
-
 
 func _on_MobTimer_timeout():
 	# Create a new instance of the Mob scene.
@@ -46,12 +50,19 @@ func _on_MobTimer_timeout():
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
 
-
 func _on_ScoreTimer_timeout():
 	score += 1
 	$HUD.update_score(score)
 
-
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
+
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().paused = !get_tree().paused
+
+		if get_tree().paused:
+			$Music.stream_paused = true
+		else:
+			$Music.stream_paused = false
