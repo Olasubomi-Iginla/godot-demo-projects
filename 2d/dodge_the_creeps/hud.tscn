@@ -83,5 +83,10 @@ label_settings = SubResource("LabelSettings_64ctp")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="HighScoreLabel" type="Label" parent="." unique_id=240986217]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "High Score: 0"
+
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

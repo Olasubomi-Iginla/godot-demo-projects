@@ -17,6 +17,7 @@ func game_over():
 
 	if score > high_score:
 		high_score = score
+		$HUD.update_high_score(high_score)
 
 	$HUD.show_game_over()
 	$Music.stop()
@@ -35,6 +36,7 @@ func new_game():
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
+	$HUD.update_high_score(high_score)
 	$HUD.show_message("Get Ready")
 	$Music.play()
 
