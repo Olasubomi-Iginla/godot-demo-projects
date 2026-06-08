@@ -2,6 +2,7 @@ extends Node
 
 @export var mob_scene: PackedScene
 var score
+var high_score = 0
 
 func _ready():
 	# Allow this node to continue receiving input while paused
@@ -13,9 +14,15 @@ func _ready():
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
+
+	if score > high_score:
+		high_score = score
+
 	$HUD.show_game_over()
 	$Music.stop()
 	$DeathSound.play()
+
+	print("High Score: ", high_score)
 
 func new_game():
 	get_tree().paused = false
