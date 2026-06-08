@@ -9,6 +9,10 @@ action = &"start_game"
 [sub_resource type="Shortcut" id="4"]
 events = [SubResource("InputEventAction_fopy7")]
 
+[sub_resource type="LabelSettings" id="LabelSettings_64ctp"]
+font_size = 30
+font_color = Color(0.6392157, 0.6392157, 0.6392157, 1)
+
 [node name="HUD" type="CanvasLayer" unique_id=126421993]
 script = ExtResource("1")
 
@@ -56,6 +60,28 @@ text = "Start"
 
 [node name="MessageTimer" type="Timer" parent="." unique_id=1675980570]
 one_shot = true
+
+[node name="PauseLabel" type="Label" parent="." unique_id=893196516]
+process_mode = 2
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -11.5
+offset_right = 31.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "====================
+       PAUSED
+Press ESC to Resume
+===================="
+label_settings = SubResource("LabelSettings_64ctp")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

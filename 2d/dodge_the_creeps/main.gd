@@ -4,8 +4,11 @@ extends Node
 var score
 
 func _ready():
-	# Allow this node to continue receiving input while the game is paused
+	# Allow this node to continue receiving input while paused
 	process_mode = Node.PROCESS_MODE_ALWAYS
+
+	# Hide pause message when game starts
+	$HUD/PauseLabel.hide()
 
 func game_over():
 	$ScoreTimer.stop()
@@ -16,6 +19,9 @@ func game_over():
 
 func new_game():
 	get_tree().paused = false
+
+	# Hide pause message when starting/restarting
+	$HUD/PauseLabel.hide()
 
 	get_tree().call_group(&"mobs", &"queue_free")
 	score = 0
@@ -60,9 +66,12 @@ func _on_StartTimer_timeout():
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
-		get_tree().paused = !get_tree().paused
 
 		if get_tree().paused:
-			$Music.stream_paused = true
-		else:
+			$HUD/PauseLabel.hide()
 			$Music.stream_paused = false
+			get_tree().paused = false
+		else:
+			$HUD/PauseLabel.show()
+			$Music.stream_paused = true
+			get_tree().paused = true
